@@ -1,0 +1,23 @@
+print(model)
+JointEmbeder(
+  (name_encoder): SeqEncoder(
+    (embedding): Embedding(10000, 512, padding_idx=0)
+    (lstm): LSTM(512, 1024, batch_first=True, bidirectional=True)
+  )
+  (api_encoder): SeqEncoder(
+    (embedding): Embedding(10000, 512, padding_idx=0)
+    (lstm): LSTM(512, 1024, batch_first=True, bidirectional=True)
+  )
+  (tok_encoder): BOWEncoder(
+    (embedding): Embedding(10000, 512)
+  )
+  (desc_encoder): SeqEncoder(
+    (embedding): Embedding(10000, 512, padding_idx=0)
+    (lstm): LSTM(512, 1024, batch_first=True, bidirectional=True)
+  )
+  (w_name): Linear(in_features=2048, out_features=512, bias=True)
+  (w_api): Linear(in_features=2048, out_features=512, bias=True)
+  (w_tok): Linear(in_features=512, out_features=512, bias=True)
+  (w_desc): Linear(in_features=2048, out_features=512, bias=True)
+  (fuse3): Linear(in_features=512, out_features=512, bias=True)
+)

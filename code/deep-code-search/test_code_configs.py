@@ -14,12 +14,20 @@ def config_JointEmbeder():
         'valid_desc': 'valid.desc.h5',
         # use data (computing code vectors)
         'use_codebase': 'use.rawcode.txt',  # 'use.rawcode.h5'
-        # 'use_names': 'use.name.h5',
-        'use_names': 'use.methname.h5',
-        'use_apis': 'use.apiseq.h5',
-        'use_tokens': 'use.tokens.h5',
+        # # 'use_names': 'use.name.h5',
+        # 'use_names': 'use.methname.h5',
+        # 'use_apis': 'use.apiseq.h5',
+        # 'use_tokens': 'use.tokens.h5',
+#=======================================================
+        # test_code
+        'test_names': 'test.methname.h5',
+        'test_apis': 'test.apiseq.h5',
+        'test_tokens': 'test.tokens.h5',
         # results data(code vectors)
-        'use_codevecs': 'use.codevecs.h5',
+        'test_codevecs': 'test.codevecs.h5',
+# =======================================================
+        # results data(code vectors)
+        # 'use_codevecs': 'use.codevecs.h5',
 
         # parameters
         'name_len': 6,
