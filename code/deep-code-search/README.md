@@ -70,4 +70,4 @@ PyTorch implementation of [Deep Code Search](https://guxd.github.io/papers/deepc
    
    Here is a screenshot of code search:
    
-   <img src="/home/huangxin/code/python/code-search/code/deep-code-search/txt_file/search_result_top5.png" width=100% height=100%>
+   <img src="./txt_file/search_result_top5.png" width=100% height=100%>
