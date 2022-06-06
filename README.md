@@ -12,7 +12,7 @@ arch% tree
 │   └── codebert
 │       ├── data_process.py
 │       └── run_classifier.py
-├── markdown
+├── docs
 │   └── multi-gp-training.md
 ├── paper
 │   └── CodeBERT: A Pre-Trained Model for Programming and Natural Languages.pdf
