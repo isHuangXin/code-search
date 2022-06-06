@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/wanyao/huangxin/code-search/code/debug-test/test_1/')
+sys.path.append('/home/wanyao/huangxin/src-search/src/debug-test/test_1/')
 from aa import test_aa
 
 

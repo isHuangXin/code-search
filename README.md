@@ -8,7 +8,7 @@
 ```shell
 arch% tree
 .
-├── code
+├── src
 │   └── codebert
 │       ├── data_process.py
 │       └── run_classifier.py

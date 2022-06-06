@@ -108,8 +108,8 @@ class SearchEngine:
     ##### Evaluation in the develop set #####
     def valid(self, model, poolsize, K, dataset_dump_path):
         """
-        validate in a code pool. 
-        param: poolsize - size of the code pool, if -1, load the whole test set
+        validate in a src pool.
+        param: poolsize - size of the src pool, if -1, load the whole test set
         """
         def ACC(real,predict):
             sum=0.0
@@ -199,7 +199,7 @@ class SearchEngine:
         apiseqs = pad(apiseqs, self.data_params['apiseq_len'])
         tokens = pad(tokens, self.data_params['tokens_len'])
 
-        logger.info('Representing code ..')
+        logger.info('Representing src ..')
         vecs= model.repr_code([methnames, apiseqs, tokens], batch_size=10000)
         vecs= vecs.astype(np.float)
         vecs= normalize(vecs)
@@ -264,7 +264,7 @@ def parse_args():
                         help="The mode to run. The `train` mode trains a model;"
                         " the `eval` mode evaluat models in a test set "
                         " The `repr_code/repr_desc` mode computes vectors"
-                        " for a code snippet or a natural language description with a trained model.")
+                        " for a src snippet or a natural language description with a trained model.")
     parser.add_argument("--verbose", action="store_true", default=True, help="Be verbose")
     parser.add_argument('--dataset_dump_path', type=str,
                         default="/mnt/gold/huangxin/data/raw_codesearchnet/my_vocab_processed_codesearchnet_in_pckl/python/codetokens_len_250_final",
@@ -281,7 +281,7 @@ if __name__ == '__main__':
     logger.info('Build Model')
     model = getattr(models, args.model)(config)  #initialize the model
     model.build()
-    model.summary(export_path=f"/mnt/gold/huangxin/code/deepcs/keras/output/{args.model}/")
+    model.summary(export_path=f"/mnt/gold/huangxin/src/deepcs/keras/output/{args.model}/")
     
     optimizer = config.get('training_params', dict()).get('optimizer', 'adam')
     model.compile(optimizer=optimizer)  
@@ -303,39 +303,15 @@ if __name__ == '__main__':
         vecs = engine.repr_code(model)
         data_loader.save_code_reprs(vecs, data_path+config['data_params']['use_codevecs'])
 
-    # elif args.mode=='search':
-    #     #search code based on a desc
-    #     assert config['training_params']['reload']>0, "please specify the number of epoch of the optimal checkpoint in config.py"
-    #     engine.load_model(model, config['training_params']['reload'])
-    #     engine._code_reprs = data_loader.load_code_reprs(data_path+config['data_params']['use_codevecs'], engine._codebase_chunksize)
-    #     engine._codebase = data_loader.load_codebase(data_path+config['data_params']['use_codebase'], engine._codebase_chunksize)
-    #     vocab = data_loader.load_pickle(data_path+config['data_params']['vocab_desc'])
-    #     while True:
-    #         try:
-    #             query = input('Input Query: ')
-    #             n_results = int(input('How many results? '))
-    #         except Exception:
-    #             print("Exception while parsing your input:")
-    #             traceback.print_exc()
-    #             break
-    #         query = query.lower().replace('how to ', '').replace('how do i ', '').replace('how can i ', '').replace('?', '').strip()
-    #         codes,sims=engine.search(model, vocab, query, n_results)
-    #         zipped=zip(codes,sims)
-    #         zipped=sorted(zipped, reverse=True, key=lambda x:x[1])
-    #         zipped=engine.postproc(zipped)
-    #         zipped = list(zipped)[:n_results]
-    #         results = '\n\n'.join(map(str,zipped)) #combine the result into a returning string
-    #         print(results)
 
     elif args.mode=='search':
-        #search code based on a desc
         assert config['training_params']['reload']>0, "please specify the number of epoch of the optimal checkpoint in config.py"
         engine.load_model(model, config['training_params']['reload'])
         engine._code_reprs = data_loader.load_code_reprs(data_path+config['data_params']['use_codevecs'], engine._codebase_chunksize)
         engine._codebase = data_loader.load_codebase(data_path+config['data_params']['use_codebase'], engine._codebase_chunksize)
         vocab = data_loader.load_pickle(data_path+config['data_params']['vocab_desc'])
 
-        f_desc = open(f'/mnt/gold/huangxin/code/deepcs/keras/txt_search/query_input.txt', "r")
+        f_desc = open(f'/mnt/gold/huangxin/src/deepcs/keras/txt_search/query_input.txt', "r")
         lines_desc = f_desc.readlines()  # 读取全部内容 ，并以列表方式返回
         starttime_all = datetime.datetime.now()
         per_query_time = []
@@ -357,7 +333,7 @@ if __name__ == '__main__':
             print(query)
             print("Serach result idx")
             print(idx)
-            print("Search result code as below:")
+            print("Search result src as below:")
             print(results)
             print("===========================================================================\n")
             per_query_time.append(time_cost)
