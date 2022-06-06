@@ -1,26 +1,28 @@
-# code-search
-自己实现一些Code Search领域的Baseline
+# Code-Search-Research
 
 ---
+### Paper-implementations in Code Search (Baseline).
+- Aleardy
+  - CodeBERT
+  - Deep Code Search
 
-- CodeBERT
-- Deep Code Search
+- Doing&ToDo
+  - GNN in Code-Search
 ```shell
-arch% tree
+➜  code-search git:(main) ✗ tree -L 2
 .
-├── src
-│   └── codebert
-│       ├── data_process.py
-│       └── run_classifier.py
 ├── docs
-│   └── multi-gp-training.md
+│   ├── log
+│   └── markdown
 ├── paper
-│   └── CodeBERT: A Pre-Trained Model for Programming and Natural Languages.pdf
-├── pytorch-learning
-│   └── parallel-and-distributed-training
-│       └── single-machine-model-parallelism.py
-└── README.md
+│   ├── already
+│   └── donging&todo
+├── README.md
+└── src
+    ├── codebert
+    ├── crwal
+    ├── deep-code-search
+    └── vocab-build-on-codesearchnet
 
-6 directories, 6 files
-
+11 directories, 1 file
 ```
